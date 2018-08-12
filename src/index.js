@@ -30,6 +30,11 @@ class SlackServerlessPlugin {
     const message = this.serverless.service.custom.slack.function_deploy_message ||
             '`{{user}}` deployed function `{{name}}` to environment `{{stage}}` in service `{{service}}`';
 
+    const onlyOn = this.serverless.service.custom.slack.only_on || this.messageVariables.stage; 
+    if (onlyOn !== this.messageVariables.stage) {
+      return;
+    }
+
     const parsedMessage = SlackServerlessPlugin.parseMessage(message, this.messageVariables);
 
     const requestOptions = SlackServerlessPlugin
@@ -41,6 +46,11 @@ class SlackServerlessPlugin {
   afterDeployService() {
     const message = this.serverless.service.custom.slack.service_deploy_message ||
     '`{{user}}` deployed service `{{service}}` to environment `{{stage}}`';
+
+    const onlyOn = this.serverless.service.custom.slack.only_on || this.messageVariables.stage;
+    if (onlyOn !== this.messageVariables.stage) {
+      return;
+    }
 
     const parsedMessage = SlackServerlessPlugin.parseMessage(message, this.messageVariables);
 

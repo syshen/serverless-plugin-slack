@@ -1,6 +1,6 @@
 {
   "name": "serverless-plugin-slack",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Serverless Plugin Slack",
   "main": "src/index.js",
   "author": { "name": "Maarten van Vliet" },
